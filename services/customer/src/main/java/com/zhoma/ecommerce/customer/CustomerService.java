@@ -36,15 +36,28 @@ public class CustomerService {
 
 
     public List<CustomerResponse> findAllCustomers() {
+        return  this.repository.findAll()
+                .stream()
+                .map(this.mapper::fromCustomer)
+                .collect(Collectors.toList());
     }
+
 
     public Boolean existsById(String customerId) {
-    }
+        return this.repository.findById(customerId)
+                .isPresent();
+
+       }
 
     public CustomerResponse findById(String customerId) {
+        return this.repository.findById(customerId)
+                .map(mapper::fromCustomer)
+                .orElseThrow(() -> new CustomerNotFoundException(String.format("No customer found with the provided ID: %s", customerId)));
+
     }
 
     public void deleteCustomer(String customerId) {
+        this.repository.deleteById(customerId);
     }
 
     private void mergerCustomer(Customer updatedCustomer, CustomerRequest request) {
