@@ -2,7 +2,6 @@ package com.zhoma.ecommerce.customer;
 
 
 import com.zhoma.ecommerce.exception.CustomerNotFoundException;
-import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -10,14 +9,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
+
 public class CustomerService {
 
     private final CustomerRepository repository;
     private final CustomerMapper mapper;
 
+    public CustomerService(CustomerRepository repository, CustomerMapper mapper) {
+        this.repository = repository;
+        this.mapper = mapper;
+    }
+
     public String createCustomer(CustomerRequest request) {
-        var customer = this.repository.save(mapper.toCustomer(request));
+        Customer customer = this.repository.save(mapper.toCustomer(request));
+
         return customer.getId();
     }
 

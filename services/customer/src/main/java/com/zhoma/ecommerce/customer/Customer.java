@@ -1,15 +1,20 @@
 package com.zhoma.ecommerce.customer;
 
 
-import lombok.*;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter
-@Setter
+@Data
+@Accessors(chain = true)
 @Document
 public class Customer {
     @Id
