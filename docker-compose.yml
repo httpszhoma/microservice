@@ -1,14 +1,16 @@
 services:
-  postgres:
+  postgresql:
     container_name: ms_pg_sql
     image: postgres
     environment:
-      POSTGRES_USER: zhomart
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: zhoma005
+
+      PGDATA: /data/postgres
     volumes:
-      - postgres:/var/lib/postgresql/data
+      - postgres:/data/postgres
     ports:
-      - 5432:5432
+        - '5433:5432'
     networks:
       - microservices-net
     restart: unless-stopped
