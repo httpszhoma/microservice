@@ -67,10 +67,10 @@ services:
 
   mail-dev:
     container_name: ms-mail-dev
-    image: maildev/maildev
+    image: maildev/maildev:2.1.0
     ports:
-      - 1080:1080
-      - 1025:1025
+        - "1080:1080"
+        - "1025:1025"
 networks:
   microservices-net:
     driver: bridge
